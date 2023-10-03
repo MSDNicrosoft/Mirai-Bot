@@ -1,0 +1,6 @@
+id: work.msdnicrosoft.mirai
+version: {{ version }}
+
+name: MSDNicrosoft-Mirai
+author: MSDNicrosoft
+info: Welcome to use MSDNicrosoft-Mirai !
