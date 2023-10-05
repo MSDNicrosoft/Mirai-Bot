@@ -12,6 +12,7 @@ import work.msdnicrosoft.mirai.plugin.crazythursday.CrazyThursdayPlugin
 import work.msdnicrosoft.mirai.plugin.hitokoto.HitokotoConfig
 import work.msdnicrosoft.mirai.plugin.hitokoto.HitokotoPlugin
 import work.msdnicrosoft.mirai.plugin.hitokoto.HitokotoTimer
+import work.msdnicrosoft.mirai.plugin.minecraft.server.McServerControlPlugin
 import work.msdnicrosoft.mirai.plugin.minecraft.uuid.McUuidPlugin
 import work.msdnicrosoft.mirai.plugin.minecraft.version.McVerPlugin
 import work.msdnicrosoft.mirai.plugin.sentry.SentryConfig
@@ -59,9 +60,10 @@ object MiraiBot : KotlinPlugin(JvmPluginDescription.loadFromResource()) {
                 CommandManager.INSTANCE.registerCommand(command, true)
             }
         }
-        // register()
+        register(
             HitokotoPlugin,
             CrazyThursdayPlugin,
+            McServerControlPlugin,
             McVerPlugin,
             McUuidPlugin,
             SentryPlugin
