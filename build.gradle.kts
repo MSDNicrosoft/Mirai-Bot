@@ -25,7 +25,6 @@ base {
             "dev"
         }
     }"
-    rootProject.version = version
 }
 
 repositories {
@@ -93,5 +92,16 @@ tasks {
 
     compileKotlin {
         dependsOn("detekt")
+        kotlinOptions {
+            jvmTarget = jvmVersion
+        }
+    }
+
+    compileJava {
+        enabled = false
+    }
+
+    processTestResources {
+        enabled = false
     }
 }
