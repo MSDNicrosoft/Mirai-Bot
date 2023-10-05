@@ -1,5 +1,6 @@
 package work.msdnicrosoft.mirai
 
+import io.sentry.Sentry
 import net.mamoe.mirai.console.command.Command
 import net.mamoe.mirai.console.command.CommandManager
 import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescription
@@ -9,6 +10,9 @@ import org.quartz.*
 import org.quartz.impl.StdSchedulerFactory
 import work.msdnicrosoft.mirai.MiraiBot.reload
 import work.msdnicrosoft.mirai.MiraiBot.save
+import work.msdnicrosoft.mirai.plugin.sentry.SentryConfig
+import work.msdnicrosoft.mirai.plugin.sentry.SentryEvent
+import work.msdnicrosoft.mirai.plugin.sentry.SentryPlugin
 import java.time.LocalTime
 
 object MiraiBot : KotlinPlugin(JvmPluginDescription.loadFromResource()) {
@@ -23,6 +27,10 @@ object MiraiBot : KotlinPlugin(JvmPluginDescription.loadFromResource()) {
         scheduler.start()
         registerScheduledTasks()
 
+        if (SentryConfig.enabled) {
+            initSentry()
+        }
+
         logger.info("MSDNicrosoft-Mirai has been enabled!")
     }
 
@@ -32,9 +40,11 @@ object MiraiBot : KotlinPlugin(JvmPluginDescription.loadFromResource()) {
     }
 
     private fun saveAllPluginConfig() {
+        SentryConfig.save()
     }
 
     private fun reloadAllPluginConfig() {
+        SentryConfig.reload()
     }
 
     private fun registerCommands() {
@@ -44,6 +54,7 @@ object MiraiBot : KotlinPlugin(JvmPluginDescription.loadFromResource()) {
             }
         }
         // register()
+            SentryPlugin
     }
 
     private fun registerScheduledTasks() {
@@ -57,5 +68,19 @@ object MiraiBot : KotlinPlugin(JvmPluginDescription.loadFromResource()) {
             .withSchedule(CronScheduleBuilder.dailyAtHourAndMinute(targetTime.hour, targetTime.minute))
             .build()
         scheduler.scheduleJob(job, trigger)
+    }
+
+    private fun initSentry() {
+        if (!MiraiBot.version.toString().endsWith("dev")) {
+            Sentry.init {
+                it.dsn = SentryConfig.sentryDsn
+                it.release = MiraiBot.version.toString()
+                it.shutdownTimeoutMillis = 2000
+                it.isAttachStacktrace = true
+                it.maxBreadcrumbs = 50
+                it.environment = "Production"
+            }
+            Thread.setDefaultUncaughtExceptionHandler(SentryEvent())
+        }
     }
 }

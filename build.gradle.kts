@@ -52,6 +52,9 @@ dependencies {
     val quartz_version: String by project
     implementation("org.quartz-scheduler:quartz:$quartz_version")
 
+    val sentry_version: String by project
+    implementation("io.sentry:sentry:$sentry_version")
+
     val detektVersion = "1.23.1"
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:${detektVersion}")
 }
