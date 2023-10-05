@@ -10,6 +10,9 @@ import org.quartz.*
 import org.quartz.impl.StdSchedulerFactory
 import work.msdnicrosoft.mirai.MiraiBot.reload
 import work.msdnicrosoft.mirai.MiraiBot.save
+import work.msdnicrosoft.mirai.plugin.hitokoto.HitokotoConfig
+import work.msdnicrosoft.mirai.plugin.hitokoto.HitokotoPlugin
+import work.msdnicrosoft.mirai.plugin.hitokoto.HitokotoTimer
 import work.msdnicrosoft.mirai.plugin.sentry.SentryConfig
 import work.msdnicrosoft.mirai.plugin.sentry.SentryEvent
 import work.msdnicrosoft.mirai.plugin.sentry.SentryPlugin
@@ -40,10 +43,12 @@ object MiraiBot : KotlinPlugin(JvmPluginDescription.loadFromResource()) {
     }
 
     private fun saveAllPluginConfig() {
+        HitokotoConfig.save()
         SentryConfig.save()
     }
 
     private fun reloadAllPluginConfig() {
+        HitokotoConfig.reload()
         SentryConfig.reload()
     }
 
@@ -54,11 +59,14 @@ object MiraiBot : KotlinPlugin(JvmPluginDescription.loadFromResource()) {
             }
         }
         // register()
+            HitokotoPlugin,
             SentryPlugin
+        )
     }
 
     private fun registerScheduledTasks() {
         listOf(
+            HitokotoTimer::class.java to LocalTime.of(HitokotoConfig.time.hour, HitokotoConfig.time.minute),
         ).forEach { (jobClass, targetTime) -> addScheduleJob(jobClass, targetTime) }
     }
 
