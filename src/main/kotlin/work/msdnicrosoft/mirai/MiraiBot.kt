@@ -8,8 +8,7 @@ import net.mamoe.mirai.console.plugin.jvm.KotlinPlugin
 import net.mamoe.mirai.console.plugin.version
 import org.quartz.*
 import org.quartz.impl.StdSchedulerFactory
-import work.msdnicrosoft.mirai.MiraiBot.reload
-import work.msdnicrosoft.mirai.MiraiBot.save
+import work.msdnicrosoft.mirai.plugin.crazythursday.CrazyThursdayPlugin
 import work.msdnicrosoft.mirai.plugin.hitokoto.HitokotoConfig
 import work.msdnicrosoft.mirai.plugin.hitokoto.HitokotoPlugin
 import work.msdnicrosoft.mirai.plugin.hitokoto.HitokotoTimer
@@ -60,6 +59,7 @@ object MiraiBot : KotlinPlugin(JvmPluginDescription.loadFromResource()) {
         }
         // register()
             HitokotoPlugin,
+            CrazyThursdayPlugin,
             SentryPlugin
         )
     }
