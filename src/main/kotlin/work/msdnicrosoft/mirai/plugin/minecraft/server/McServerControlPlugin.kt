@@ -7,8 +7,9 @@ import kotlinx.coroutines.runBlocking
 import net.mamoe.mirai.console.command.CommandSender
 import net.mamoe.mirai.console.command.CompositeCommand
 import work.msdnicrosoft.mirai.MiraiBot
-import work.msdnicrosoft.mirai.plugin.minecraft.server.data.InstanceStatusResponse
-import work.msdnicrosoft.mirai.plugin.minecraft.server.data.OutputResponse
+import work.msdnicrosoft.mirai.plugin.minecraft.server.data.McServerControlConfig
+import work.msdnicrosoft.mirai.plugin.minecraft.server.data.Response.InstanceStatusResponse
+import work.msdnicrosoft.mirai.plugin.minecraft.server.data.Response.OutputResponse
 import work.msdnicrosoft.mirai.plugin.minecraft.server.enum.InstanceStatus
 import work.msdnicrosoft.mirai.plugin.minecraft.server.enum.OperationType
 import work.msdnicrosoft.mirai.plugin.minecraft.server.enum.enumFromInt

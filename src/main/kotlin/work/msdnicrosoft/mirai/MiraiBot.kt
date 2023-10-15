@@ -1,33 +1,38 @@
 package work.msdnicrosoft.mirai
 
 import io.sentry.Sentry
+import kotlinx.coroutines.cancel
 import net.mamoe.mirai.console.command.Command
-import net.mamoe.mirai.console.command.CommandManager
+import net.mamoe.mirai.console.command.CommandManager.INSTANCE.register
+import net.mamoe.mirai.console.command.CommandManager.INSTANCE.unregister
+import net.mamoe.mirai.console.data.PluginConfig
 import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescription
 import net.mamoe.mirai.console.plugin.jvm.KotlinPlugin
 import net.mamoe.mirai.console.plugin.version
+import net.mamoe.mirai.event.ListenerHost
+import net.mamoe.mirai.event.SimpleListenerHost
+import net.mamoe.mirai.event.globalEventChannel
+import net.mamoe.mirai.event.registerTo
 import org.quartz.*
 import org.quartz.impl.StdSchedulerFactory
-import work.msdnicrosoft.mirai.plugin.crazythursday.CrazyThursdayPlugin
-import work.msdnicrosoft.mirai.plugin.hitokoto.HitokotoConfig
-import work.msdnicrosoft.mirai.plugin.hitokoto.HitokotoPlugin
 import work.msdnicrosoft.mirai.plugin.hitokoto.HitokotoTimer
-import work.msdnicrosoft.mirai.plugin.minecraft.server.McServerControlPlugin
-import work.msdnicrosoft.mirai.plugin.minecraft.uuid.McUuidPlugin
-import work.msdnicrosoft.mirai.plugin.minecraft.version.McVerPlugin
-import work.msdnicrosoft.mirai.plugin.sentry.SentryConfig
+import work.msdnicrosoft.mirai.plugin.hitokoto.data.HitokotoConfig
 import work.msdnicrosoft.mirai.plugin.sentry.SentryEvent
-import work.msdnicrosoft.mirai.plugin.sentry.SentryPlugin
+import work.msdnicrosoft.mirai.plugin.sentry.data.SentryConfig
 import java.time.LocalTime
 
 object MiraiBot : KotlinPlugin(JvmPluginDescription.loadFromResource()) {
 
     private val scheduler: Scheduler = StdSchedulerFactory.getDefaultScheduler()
 
-    override fun onEnable() {
-        reloadAllPluginConfig()
+    private val commands: List<Command> by services()
+    private val configs: List<PluginConfig> by services()
+    private val listeners: List<ListenerHost> by services()
 
-        registerCommands()
+    override fun onEnable() {
+        for (config in configs) config.reload()
+        for (command in commands) command.register(true)
+        for (listener in listeners) (listener as SimpleListenerHost).registerTo(globalEventChannel())
 
         scheduler.start()
         registerScheduledTasks()
@@ -41,33 +46,15 @@ object MiraiBot : KotlinPlugin(JvmPluginDescription.loadFromResource()) {
 
     override fun onDisable() {
         scheduler.shutdown(false)
+
+        for (command in commands) command.unregister()
+        for (listener in listeners) (listener as SimpleListenerHost).cancel()
+
         saveAllPluginConfig()
     }
 
     private fun saveAllPluginConfig() {
-        HitokotoConfig.save()
-        SentryConfig.save()
-    }
-
-    private fun reloadAllPluginConfig() {
-        HitokotoConfig.reload()
-        SentryConfig.reload()
-    }
-
-    private fun registerCommands() {
-        fun register(vararg commands: Command) {
-            commands.forEach { command ->
-                CommandManager.INSTANCE.registerCommand(command, true)
-            }
-        }
-        register(
-            HitokotoPlugin,
-            CrazyThursdayPlugin,
-            McServerControlPlugin,
-            McVerPlugin,
-            McUuidPlugin,
-            SentryPlugin
-        )
+        for (config in configs) config.save()
     }
 
     private fun registerScheduledTasks() {

@@ -9,9 +9,9 @@ import kotlinx.serialization.json.Json
 import net.mamoe.mirai.console.command.CommandSender
 import net.mamoe.mirai.console.command.CompositeCommand
 import work.msdnicrosoft.mirai.MiraiBot
-import work.msdnicrosoft.mirai.plugin.minecraft.version.data.MinecraftManifestResponse
+import work.msdnicrosoft.mirai.plugin.minecraft.version.data.Response.MinecraftManifestResponse
 import work.msdnicrosoft.mirai.util.NetworkUtil
-import work.msdnicrosoft.mirai.util.iso2LocalTime
+import work.msdnicrosoft.mirai.util.TimeUtil
 
 object McVerPlugin : CompositeCommand(
     MiraiBot,
@@ -42,10 +42,10 @@ object McVerPlugin : CompositeCommand(
 
             val releaseTime = data.versions.firstOrNull { version ->
                 version.versionName == releaseVersion
-            }?.let { time -> iso2LocalTime(time.releaseTime) } ?: "暂无"
+            }?.let { time -> TimeUtil.iso2LocalTime(time.releaseTime) } ?: "暂无"
             val snapshotTime = data.versions.firstOrNull { version ->
                 version.versionName == snapshotVersion
-            }?.let { time -> iso2LocalTime(time.releaseTime) } ?: "暂无"
+            }?.let { time -> TimeUtil.iso2LocalTime(time.releaseTime) } ?: "暂无"
             """
             Minecraft: Java Edition
             最新正式版本：${data.latest.release}

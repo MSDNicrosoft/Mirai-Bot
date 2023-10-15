@@ -1,4 +1,4 @@
-package work.msdnicrosoft.mirai.plugin.sentry
+package work.msdnicrosoft.mirai.plugin.sentry.data
 
 import net.mamoe.mirai.console.data.AutoSavePluginConfig
 import net.mamoe.mirai.console.data.ValueDescription

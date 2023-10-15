@@ -9,8 +9,8 @@ import kotlinx.serialization.json.Json
 import net.mamoe.mirai.console.command.CommandContext
 import net.mamoe.mirai.console.command.CompositeCommand
 import work.msdnicrosoft.mirai.MiraiBot
-import work.msdnicrosoft.mirai.plugin.minecraft.uuid.data.ProfileResponse
-import work.msdnicrosoft.mirai.plugin.minecraft.uuid.data.UuidResponse
+import work.msdnicrosoft.mirai.plugin.minecraft.uuid.data.Response.ProfileResponse
+import work.msdnicrosoft.mirai.plugin.minecraft.uuid.data.Response.UuidResponse
 import work.msdnicrosoft.mirai.util.NetworkUtil
 
 object McUuidPlugin : CompositeCommand(

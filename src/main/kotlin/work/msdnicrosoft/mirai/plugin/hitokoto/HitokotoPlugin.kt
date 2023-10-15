@@ -13,7 +13,8 @@ import net.mamoe.mirai.console.command.SimpleCommand
 import org.quartz.Job
 import org.quartz.JobExecutionContext
 import work.msdnicrosoft.mirai.MiraiBot
-import work.msdnicrosoft.mirai.plugin.hitokoto.data.HitokotoResponse
+import work.msdnicrosoft.mirai.plugin.hitokoto.data.HitokotoConfig
+import work.msdnicrosoft.mirai.plugin.hitokoto.data.Response.HitokotoResponse
 import work.msdnicrosoft.mirai.util.NetworkUtil
 
 object HitokotoPlugin : SimpleCommand(

@@ -1,4 +1,4 @@
-package work.msdnicrosoft.mirai.plugin.hitokoto
+package work.msdnicrosoft.mirai.plugin.hitokoto.data
 
 import kotlinx.serialization.Serializable
 import net.mamoe.mirai.console.data.AutoSavePluginConfig

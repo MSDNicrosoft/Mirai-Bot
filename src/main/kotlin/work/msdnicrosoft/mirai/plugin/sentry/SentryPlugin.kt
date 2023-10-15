@@ -9,7 +9,8 @@ import kotlinx.serialization.json.Json
 import net.mamoe.mirai.console.command.CommandSender
 import net.mamoe.mirai.console.command.CompositeCommand
 import work.msdnicrosoft.mirai.MiraiBot
-import work.msdnicrosoft.mirai.plugin.sentry.data.SentryIssue
+import work.msdnicrosoft.mirai.plugin.sentry.data.Response.SentryIssueResponse
+import work.msdnicrosoft.mirai.plugin.sentry.data.SentryConfig
 import work.msdnicrosoft.mirai.util.NetworkUtil
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -47,7 +48,7 @@ object SentryPlugin : CompositeCommand(
                 }
             }
             val message = if (resp.status.isSuccess()) {
-                val latestIssue = resp.body<List<SentryIssue>?>()?.get(0)
+                val latestIssue = resp.body<List<SentryIssueResponse>?>()?.get(0)
                 if (latestIssue != null) {
                     val formatTime = { time: String ->
                         val sourceFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSX")

@@ -1,0 +1,3 @@
+work.msdnicrosoft.mirai.plugin.hitokoto.data.HitokotoConfig
+work.msdnicrosoft.mirai.plugin.minecraft.server.data.McServerControlConfig
+work.msdnicrosoft.mirai.plugin.sentry.data.SentryConfig

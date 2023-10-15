@@ -1,4 +1,4 @@
-package work.msdnicrosoft.mirai.plugin.minecraft.server
+package work.msdnicrosoft.mirai.plugin.minecraft.server.data
 
 import kotlinx.serialization.Serializable
 import net.mamoe.mirai.console.data.AutoSavePluginConfig

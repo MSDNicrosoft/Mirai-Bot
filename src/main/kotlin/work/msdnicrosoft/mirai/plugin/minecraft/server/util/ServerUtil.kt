@@ -7,8 +7,8 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
-import work.msdnicrosoft.mirai.plugin.minecraft.server.McServerControlConfig
-import work.msdnicrosoft.mirai.plugin.minecraft.server.data.InstanceStatusResponse
+import work.msdnicrosoft.mirai.plugin.minecraft.server.data.McServerControlConfig
+import work.msdnicrosoft.mirai.plugin.minecraft.server.data.Response.InstanceStatusResponse
 import work.msdnicrosoft.mirai.plugin.minecraft.server.enum.InstanceStatus
 import work.msdnicrosoft.mirai.plugin.minecraft.server.enum.OperationType
 import work.msdnicrosoft.mirai.plugin.minecraft.server.enum.enumFromInt
