@@ -6,7 +6,7 @@ plugins {
     kotlin("jvm").version(kotlinVersion)
     kotlin("plugin.serialization").version(kotlinVersion)
 
-    val detektVersion = "1.23.1"
+    val detektVersion = "1.23.3"
     id("io.gitlab.arturbosch.detekt").version(detektVersion)
 
     id("org.ajoberstar.grgit").version("5.2.1")
@@ -54,7 +54,7 @@ dependencies {
     val sentry_version: String by project
     implementation("io.sentry:sentry:$sentry_version")
 
-    val detektVersion = "1.23.1"
+    val detektVersion = "1.23.3"
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:${detektVersion}")
 }
 
