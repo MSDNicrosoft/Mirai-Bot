@@ -10,7 +10,7 @@ object NetworkUtil {
             headers {
                 append(
                     "User-Agent",
-                    mutableListOf(
+                    listOf(
                         "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
                         "AppleWebKit/537.36 (KHTML, like Gecko)",
                         "Chrome/115.0.0.0",
