@@ -4,3 +4,4 @@ work.msdnicrosoft.mirai.plugin.crazythursday.CrazyThursdayPlugin
 work.msdnicrosoft.mirai.plugin.minecraft.version.McVerPlugin
 work.msdnicrosoft.mirai.plugin.minecraft.uuid.McUuidPlugin
 work.msdnicrosoft.mirai.plugin.minecraft.server.McServerControlPlugin
+work.msdnicrosoft.mirai.plugin.todayinhistory.TodayInHistoryPlugin
