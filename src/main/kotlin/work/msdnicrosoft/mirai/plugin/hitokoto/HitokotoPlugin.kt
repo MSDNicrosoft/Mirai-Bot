@@ -59,8 +59,7 @@ suspend fun getHitokoto(): String {
 class HitokotoTimer : Job {
     override fun execute(context: JobExecutionContext?) {
         if (HitokotoConfig.enabled) {
-            val bots = Bot.instances
-            bots.forEach { bot ->
+            Bot.instances.forEach { bot ->
                 if (bot.isOnline) {
                     HitokotoConfig.groups.forEach { group ->
                         runBlocking { bot.getGroup(group)?.sendMessage(getHitokoto()) }
