@@ -140,18 +140,18 @@ object McServerControlPlugin : CompositeCommand(
         if (resp.status.isSuccess()) {
             val data = resp.body<InstanceStatusResponse>().data
             val status = enumFromInt(data.status)
-            val message = mutableListOf<String>().apply {
-                add(MessageUtil.getStatusMessage(status))
+            val message = buildString {
+                appendLine(MessageUtil.getStatusMessage(status))
                 if (status == InstanceStatus.RUNNING) {
                     val info = data.info
                     if (info.version.isNotBlank()) {
-                        add(info.version)
+                        appendLine(info.version)
                     }
                     if (info.maxPlayers != -1 && info.currentPlayers != -1) {
-                        add("当前在线：${info.currentPlayers}/${info.maxPlayers}")
+                        appendLine("当前在线：${info.currentPlayers}/${info.maxPlayers}")
                     }
                 }
-            }.joinToString("\n")
+            }
             sendMessage(message)
         }
     }
@@ -159,7 +159,7 @@ object McServerControlPlugin : CompositeCommand(
     @SubCommand("list")
     @Description("查看可操作的服务器列表")
     suspend fun CommandSender.list() {
-        sendMessage("当前可操作的服务器：${McServerControlConfig.instances.keys.joinToString("，")}")
+        sendMessage("当前可操作的服务器：${McServerControlConfig.instances.keys.joinToString()}")
     }
 
     @SubCommand("exec")
