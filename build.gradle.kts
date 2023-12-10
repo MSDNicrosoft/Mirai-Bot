@@ -51,6 +51,9 @@ dependencies {
     val quartz_version: String by project
     implementation("org.quartz-scheduler:quartz:$quartz_version")
 
+    val oshi_version: String by project
+    implementation("com.github.oshi:oshi-core:$oshi_version")
+
     val sentry_version: String by project
     implementation("io.sentry:sentry:$sentry_version")
 
