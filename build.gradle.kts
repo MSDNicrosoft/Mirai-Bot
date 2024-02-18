@@ -9,7 +9,7 @@ plugins {
     val detektVersion = "1.23.5"
     id("io.gitlab.arturbosch.detekt").version(detektVersion)
 
-    id("org.ajoberstar.grgit").version("5.2.1")
+    id("org.ajoberstar.grgit").version("5.2.2")
     id("net.mamoe.mirai-console").version("2.16.0")
     id("net.kyori.blossom").version("2.1.0")
     id("com.github.johnrengelman.shadow").version("8.1.1")  // FIXME
