@@ -2,14 +2,14 @@ import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
 
 plugins {
-    val kotlinVersion = "1.9.22"
+    val kotlinVersion = "1.9.23"
     kotlin("jvm").version(kotlinVersion)
     kotlin("plugin.serialization").version(kotlinVersion)
 
-    val detektVersion = "1.23.5"
+    val detektVersion = "1.23.6"
     id("io.gitlab.arturbosch.detekt").version(detektVersion)
 
-    id("org.ajoberstar.grgit").version("5.2.1")
+    id("org.ajoberstar.grgit").version("5.2.2")
     id("net.mamoe.mirai-console").version("2.16.0")
     id("net.kyori.blossom").version("2.1.0")
     id("com.github.johnrengelman.shadow").version("8.1.1")  // FIXME
@@ -57,7 +57,7 @@ dependencies {
     val sentry_version: String by project
     implementation("io.sentry:sentry:$sentry_version")
 
-    val detektVersion = "1.23.5"
+    val detektVersion = "1.23.6"
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:${detektVersion}")
 }
 
